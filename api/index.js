@@ -1,18 +1,20 @@
-const express = require('express');
+const express = require("express");
 const PORT = 3000;
-const { default: mongoose } = require('mongoose');
+const mongoose = require("mongoose");
 const app = express();
-const env = require('dotenv');
-env.config();
+require("dotenv").config({ path: "./.env" });
+
 mongoose
-  .connect(process.env.MONGO_URL)
+  .connect(process.env.MONGO_URL, {
+   
+  })
   .then(() => {
     console.log("MongoDB is connected");
   })
   .catch((err) => {
-    console.log(err);
+    console.error("Error connecting to MongoDB:", err);
   });
 
 app.listen(PORT, () => {
-  console.log(`Server is Running on port http://localhost:${PORT}`);
+  console.log(`Server is running on http://localhost:${PORT}`);
 });
